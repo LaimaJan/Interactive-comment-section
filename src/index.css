@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap');
+@import 'reset-css';
+
+:root {
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+
+	--mobile-layout: 375px;
+	--desktop-layout: 1440px;
+
+	/* Primary Colors */
+	--moderate-blue: hsl(238, 40%, 52%);
+	--soft-red: hsl(358, 79%, 66%);
+	--light-grayish-blue: hsl(239, 57%, 85%);
+	--pale-red: hsl(357, 100%, 86%);
+
+	/* Neutral Colors */
+	--dark-blue: hsl(212, 24%, 26%);
+	--grayish-blue: hsl(211, 10%, 45%);
+	--light-gray: hsl(223, 19%, 93%);
+	--very-light-gray: hsl(228, 33%, 97%);
+	--white: hsl(0, 0%, 100%);
+
+	/* Font, size -- paragraph */
+	--font-paragraph: 17px;
+	--font: 'Rubik', sans-serif;
+
+	--button-font-size: 18px;
+	--users-comment-font-size: 18px;
+}
+
+p {
+	font-size: var(--font-paragraph);
+}

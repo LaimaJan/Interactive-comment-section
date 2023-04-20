@@ -1,0 +1,239 @@
+.App {
+	background-color: var(--very-light-gray);
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	font-family: var(--font);
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-self: start;
+	max-width: 900px;
+	margin: 20px 0;
+}
+
+.comment {
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 20px;
+	margin: 10px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: self-start;
+	gap: 20px;
+}
+
+.rating {
+	background-color: var(--light-gray);
+	border-radius: 10px;
+	padding: 20px 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.rating p {
+	color: var(--moderate-blue);
+	font-weight: 500;
+}
+
+.rating button {
+	border: none;
+	cursor: pointer;
+}
+
+.comment-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.user-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.user {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	letter-spacing: 0.4px;
+}
+
+.user img {
+	width: 15%;
+}
+
+.user-name {
+	color: var(--dark-blue);
+	font-weight: 700;
+}
+
+.comment-date {
+	color: var(--grayish-blue);
+	font-weight: 400;
+}
+
+.reply-btn button {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--moderate-blue);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
+
+.reply-btn:hover {
+	filter: brightness(0) saturate(100%) invert(90%) sepia(5%) saturate(4854%)
+		hue-rotate(188deg) brightness(99%) contrast(87%);
+}
+
+.users-comment {
+	margin: 10px 10px 10px 0;
+	color: var(--grayish-blue);
+	font-weight: 400;
+	line-height: 1.5;
+	letter-spacing: 0.8px;
+	font-size: var(--users-comment-font-size);
+}
+
+.reply {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+}
+
+.reply-divider {
+	border-left: 3px solid var(--light-grayish-blue);
+	margin: 0 60px;
+}
+
+.reply .comment-border {
+	margin-bottom: 0;
+}
+
+.add-comment {
+	margin-top: 15px;
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.commenter-avatar.hide {
+	width: 10%;
+	height: 10%;
+}
+
+.add-comment textarea {
+	border-color: var(--light-gray);
+	border-style: solid;
+
+	width: 100%;
+	padding: 10px 30px;
+	border-radius: 10px;
+	min-height: 100px;
+	resize: none;
+
+	padding-top: 10px;
+	font-weight: 400;
+	letter-spacing: 0.4px;
+	line-height: 1.5;
+
+	font-size: 17px;
+	font-family: var(--font);
+	cursor: pointer;
+}
+
+.add-comment textarea:focus {
+	outline: none;
+}
+
+.add-comment textarea::placeholder {
+	padding-top: 5px;
+	font-weight: 400;
+	letter-spacing: 0.4px;
+	line-height: 1.5;
+
+	font-size: 17px;
+	font-family: var(--font);
+}
+
+.send-btn button {
+	color: var(--white);
+	font-size: 20px;
+	font-weight: 600;
+	background-color: var(--moderate-blue);
+	padding: 15px 25px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+.commenter-avatar.show {
+	display: none;
+}
+
+/* When width is 375, change */
+.comment-info {
+	display: none;
+}
+
+.comment-info-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.comment-rating {
+	background-color: var(--light-gray);
+	border-radius: 10px;
+	padding: 12px 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.comment-rating button {
+	border: none;
+	display: flex;
+	justify-content: center;
+}
+
+.comment-rating p {
+	color: var(--moderate-blue);
+	font-weight: 500;
+}
+
+.comment-reply-btn button {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--moderate-blue);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
