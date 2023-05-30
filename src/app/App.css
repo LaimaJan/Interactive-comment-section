@@ -193,6 +193,70 @@
 	display: none;
 }
 
+.modal {
+	display: none;
+	position: absolute;
+	/* display: flex;  */
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(50, 65, 82, 0.3);
+
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+.delete-card {
+	max-width: 350px;
+	background-color: var(--white);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	padding: 40px 40px;
+}
+
+.modal-header {
+	font-size: 20px;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	margin-bottom: 20px;
+}
+
+.modal-paragraph {
+	color: var(--grayish-blue);
+	margin-bottom: 20px;
+}
+
+.delete-card-buttons {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.delete-card-buttons button {
+	border-radius: 10px;
+	border: none;
+	padding: 15px 35px;
+	font-size: 14px;
+	color: var(--white);
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.delete-card-buttons button:first-child {
+	background-color: var(--grayish-blue);
+}
+
+.delete-card-buttons button:nth-child(even) {
+	background-color: var(--soft-red);
+}
+
 @media (max-width: 375px) {
 	.App {
 		height: 100%;
