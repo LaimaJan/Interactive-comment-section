@@ -1,131 +1,126 @@
 import './App.css';
 import Comment from './components/Comment/Comment';
-import comments from './data';
-import user from './user.json';
-import DeleteIcon from '../images/icons/icon-delete.svg';
-import EditIcon from '../images/icons/icon-edit.svg';
-import MinusIcon from '../images/icons/icon-minus.svg';
-import PlusIcon from '../images/icons/icon-plus.svg';
-import ReplyIcon from '../images/icons/icon-reply.svg';
+import Reply from './components/Reply/Reply';
+import JuliusComments from './components/JuliusComments/JuliusComents';
 
-import AmyRobinsonAvatar from '../images/avatars/image-amyrobson.png';
-import JuliusMomoAvatar from '../images/avatars/image-juliusomo.png';
-import MaxBlagunAvatar from '../images/avatars/image-maxblagun.png';
-import RamsesMironAvatar from '../images/avatars/image-ramsesmiron.png';
+import data from '../data.json';
 
-import React, { useState } from 'react';
-// import { v4 as uuid } from 'uuid';
+import JuliusMomoAvatar from '../../public/images/avatars/image-juliusomo.png';
+
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-	// const unique_id = uuid();
-	// console.log(comments);
-	// console.log(user);
-	const [rating, setRating] = useState('2');
-	// const ids = [uuid(), uuid(), uuid()];
+	const [usersData, setUsersData] = useState([]);
+	const [juliusComments, setJuliusComments] = useState([]);
+	const [juliusComment, setJuliusComment] = useState('');
+	const [showModal, setShowModal] = useState(false);
+	const [commentToDeleteId, setCommentToDeleteId] = useState(null);
 
-	const increaseRating = (id) => {
-		console.log(id);
+	const generateUniqueId = uuidv4();
 
-		// event.currentTarget
+	useEffect(() => {
+		const storedComments = localStorage.getItem('juliusComments');
+		if (storedComments) {
+			setJuliusComments(JSON.parse(storedComments));
+		}
 
-		// console.log('parent: ', parent);
-		// setRating(rating + 1);
-		// console.log('Increased by one');
+		const storedUserData = localStorage.getItem('usersData');
+		if (storedUserData) {
+			setUsersData(JSON.parse(storedUserData));
+		}
+	}, []);
+
+	const handleCommentSubmit = () => {
+		const newComment = {
+			id: generateUniqueId,
+			name: 'juliusmomo',
+			content: juliusComment,
+			rating: 0,
+			date: '',
+		};
+
+		const updatedComments = [...juliusComments, newComment];
+		setJuliusComments(updatedComments);
+		juliusCommentsToLocalStorage(updatedComments);
+		setJuliusComment('');
 	};
 
-	const decreaseRating = (id) => {
-		console.log(id);
-		// setRating(rating - 1);
-		console.log('Decreased by one');
+	const deleteJuliusComment = (id) => {
+		setCommentToDeleteId(id);
+		setShowModal(true);
+	};
+
+	const confirmDeleteComment = () => {
+		if (commentToDeleteId) {
+			const updatedComments = juliusComments.filter(
+				(comment) => comment.id !== commentToDeleteId
+			);
+			setJuliusComments(updatedComments);
+			juliusCommentsToLocalStorage(updatedComments);
+		}
+		setShowModal(false);
+		setCommentToDeleteId(null);
+	};
+
+	const cancelDeleteComment = () => {
+		setShowModal(false);
+		setCommentToDeleteId(null);
+	};
+
+	const updateJuliusComment = (id, editedComment) => {
+		const updatedComments = juliusComments.map((comment) => {
+			if (comment.id === id) {
+				return {
+					...comment,
+					content: editedComment,
+				};
+			}
+			return comment;
+		});
+		setJuliusComments(updatedComments);
+		juliusCommentsToLocalStorage(updatedComments);
+	};
+
+	const juliusCommentsToLocalStorage = (comments) => {
+		localStorage.setItem('juliusComments', JSON.stringify(comments));
+		localStorage.setItem('usersData', JSON.stringify(data));
 	};
 
 	return (
 		<div className="App">
-			{/* First comment */}
-			{comments.map((comment, key) => {
-				return (
-					<Comment
-						key={key}
-						rating={rating}
-						id={comment.id}
-						avatar={comment.author.image}
-						userName={comment.author.name}
-						userDate={comment.author.date}
-						userComment={comment.content}
-					/>
-				);
-			})}
+			{/* Render the comments */}
+			{usersData.map((comment, key) => (
+				<Comment
+					key={key}
+					rating={comment.rating}
+					id={comment.id}
+					avatar={comment.author.image}
+					userName={comment.author.name}
+					userDate={comment.author.date}
+					userComment={comment.content}
+					mapData={usersData}
+					mapDataReply={comment}
+					deleteJuliusComment={() => deleteJuliusComment(comment.id)}
+				/>
+			))}
 
-			<div className="reply">
-				<hr className="reply-divider" />
-				<div className="comment">
-					<div className="rating" id="5">
-						<button onClick={() => increaseRating()}>
-							<img src={PlusIcon} alt="Plus icon" className="plus-icon icon" />
-						</button>
-
-						<p>{rating}</p>
-						<button onClick={() => decreaseRating()}>
-							<img
-								src={MinusIcon}
-								alt="Minus icon"
-								className="minus-icon icon"
-							/>
-						</button>
-					</div>
-					<div className="comment-content">
-						<div className="user-info">
-							<div className="user">
-								<img src={RamsesMironAvatar} alt="Ramses Miron Avatar" />
-								<p className="user-name">ramsesmiron</p>
-								<p className="user-date">1 weeks ago</p>
-							</div>
-							<div className="reply-btn">
-								<button>
-									<img src={ReplyIcon} alt="Reply icon" />
-									Reply
-								</button>
-							</div>
-						</div>
-						<p className="users-comment">
-							Woah, your project looks awesome! How long have you been coding
-							for? I'm still new, but think I want to dive into React as well
-							soon. Perhaps you can give me an insight on where I can learn
-							React? Thanks!
-						</p>
-
-						{/* Displaying when width is 375px */}
-						<div className="comment-info">
-							<div className="comment-info-content">
-								<div className="comment-rating" id="6">
-									<button>
-										<img
-											src={PlusIcon}
-											alt="Plus icon"
-											className="plus-icon icon"
-										/>
-									</button>
-
-									<p>12</p>
-									<button>
-										<img
-											src={MinusIcon}
-											alt="Minus icon"
-											className="minus-icon icon"
-										/>
-									</button>
-								</div>
-								<div className="comment-reply-btn">
-									<button>
-										<img src={ReplyIcon} alt="Reply icon" />
-										Reply
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			{/* Render the JuliusComments */}
+			{juliusComments.map((juliusComment) => (
+				<JuliusComments
+					key={juliusComment.id}
+					rating={juliusComment.rating}
+					id={juliusComment.id}
+					avatar={JuliusMomoAvatar}
+					userName={juliusComment.name}
+					userDate="Just now"
+					userComment={juliusComment.content}
+					deleteJuliusComment={() => deleteJuliusComment(juliusComment.id)}
+					updateJuliusComment={(id, editedComment) =>
+						updateJuliusComment(juliusComment.id, editedComment)
+					}
+				/>
+			))}
 
 			{/* Add comment */}
 			<div className="add-comment">
@@ -134,7 +129,11 @@ function App() {
 					alt="Julius Momo Avatar"
 					className="commenter-avatar hide"
 				/>
-				<textarea placeholder="Add a comment..."></textarea>
+				<textarea
+					placeholder="Add a comment..."
+					value={juliusComment}
+					onChange={(e) => setJuliusComment(e.target.value)}
+				/>
 				<div className="send-btn">
 					{/* Displaying img when width is 375px */}
 					<img
@@ -142,23 +141,26 @@ function App() {
 						alt="Julius Momo Avatar"
 						className="commenter-avatar show"
 					/>
-					<button>Send</button>
+					<button onClick={handleCommentSubmit}>Send</button>
 				</div>
 			</div>
 
-			<div className="modal">
-				<div className="delete-card">
-					<p className="modal-header">Delete comment</p>
-					<p className="modal-paragraph">
-						Are you sure you want to delete this comment? This will remove the
-						comment and can't be undone.
-					</p>
-					<div className="delete-card-buttons">
-						<button>No, cancel</button>
-						<button>Yes, delete</button>
+			{/* Modal */}
+			{showModal && (
+				<div className="modal">
+					<div className="delete-card">
+						<p className="modal-header">Delete comment</p>
+						<p className="modal-paragraph">
+							Are you sure you want to delete this comment? This will remove the
+							comment and can't be undone.
+						</p>
+						<div className="delete-card-buttons">
+							<button onClick={cancelDeleteComment}>No, cancel</button>
+							<button onClick={confirmDeleteComment}>Yes, delete</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }

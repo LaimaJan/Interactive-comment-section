@@ -1,9 +1,12 @@
-import MinusIcon from '../../../images/icons/icon-minus.svg';
-import PlusIcon from '../../../images/icons/icon-plus.svg';
-import ReplyIcon from '../../../images/icons/icon-reply.svg';
-import data from '../../data.json';
+import MinusIcon from '../../../../public/images/icons/icon-minus.svg';
+import PlusIcon from '../../../../public/images/icons/icon-plus.svg';
+import ReplyIcon from '../../../../public/images/icons/icon-reply.svg';
 
 import Reply from '../Reply/Reply';
+
+import JuliusComments from '../JuliusComments/JuliusComents';
+
+import { useState } from 'react';
 
 export default function Comment({
 	rating,
@@ -12,13 +15,15 @@ export default function Comment({
 	userName,
 	userDate,
 	userComment,
-	replyRating,
-	replyId,
-	replyAvatar,
-	replyUserName,
-	replyUserDate,
-	replyUserComment,
+	mapDataReply,
 }) {
+	const [repliedToComment, setRepliedToComment] = useState('');
+	const [showReplyToComment, setShowReplyToComment] = useState(false);
+	const pressedReplyButton = () => {
+		setShowReplyToComment(true);
+		console.log('you clicked me');
+	};
+
 	return (
 		<>
 			<div className="comment">
@@ -35,12 +40,12 @@ export default function Comment({
 				<div className="comment-content">
 					<div className="user-info">
 						<div className="user">
-							<img src={avatar} alt="Amy Robinson Avatar" />
+							<img src={avatar} alt={userName} />
 							<p className="user-name">{userName}</p>
 							<p className="user-date">{userDate}</p>
 						</div>
 						<div className="reply-btn show">
-							<button>
+							<button onClick={() => pressedReplyButton()}>
 								<img src={ReplyIcon} alt="Reply icon" />
 								Reply
 							</button>
@@ -81,15 +86,23 @@ export default function Comment({
 			</div>
 
 			{/* Reply */}
+			{mapDataReply.replies &&
+				mapDataReply.replies.map((reply) => (
+					<Reply
+						key={reply.id}
+						rating={reply.rating}
+						id={reply.id}
+						avatar={reply.author.image}
+						userName={reply.author.name}
+						userDate={reply.author.date}
+						userComment={reply.content}
+					/>
+				))}
 
-			<Reply
-				rating={replyRating}
-				id={replyId}
-				avatar={replyAvatar}
-				userName={replyUserName}
-				userDate={replyUserDate}
-				userComment={replyUserComment}
-			/>
+			{showReplyToComment ? <Reply /> : ''}
+
+			{/*  Julius replies with a comment*/}
+			{/* <JuliusComments /> */}
 		</>
 	);
 }

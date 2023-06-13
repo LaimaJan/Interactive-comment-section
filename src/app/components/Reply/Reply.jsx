@@ -1,6 +1,7 @@
-import MinusIcon from '../../../images/icons/icon-minus.svg';
-import PlusIcon from '../../../images/icons/icon-plus.svg';
-import ReplyIcon from '../../../images/icons/icon-reply.svg';
+import MinusIcon from '../../../../public/images/icons/icon-minus.svg';
+import PlusIcon from '../../../../public/images/icons/icon-plus.svg';
+import ReplyIcon from '../../../../public/images/icons/icon-reply.svg';
+// import './Reply.css';
 
 export default function Reply({
 	rating,

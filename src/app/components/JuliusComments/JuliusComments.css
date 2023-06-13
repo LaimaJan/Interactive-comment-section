@@ -1,0 +1,229 @@
+.julius-comment {
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+	max-width: 800px;
+	width: 100%;
+}
+
+.reply-divider {
+	border-left: 3px solid var(--light-grayish-blue);
+	margin: 0 60px;
+}
+
+.reply .comment {
+	max-width: 600px;
+	margin: 0;
+}
+
+.you-badge {
+	background-color: var(--moderate-blue);
+	color: var(--light-gray);
+	font-weight: 500;
+	font-size: 14px;
+	text-align: center;
+	padding: 3px 5px;
+}
+
+.btn-container {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.delete-btn button {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--soft-red);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
+
+.delete-btn:hover {
+	filter: brightness(0) saturate(100%) invert(90%) sepia(5%) saturate(4854%)
+		hue-rotate(188deg) brightness(99%) contrast(87%);
+}
+
+.edit-btn button {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--moderate-blue);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
+
+.edit-btn:hover {
+	filter: brightness(0) saturate(100%) invert(90%) sepia(5%) saturate(4854%)
+		hue-rotate(188deg) brightness(99%) contrast(87%);
+}
+
+.comment-delete-btn:hover {
+	filter: brightness(0) saturate(100%) invert(90%) sepia(5%) saturate(4854%)
+		hue-rotate(188deg) brightness(99%) contrast(87%);
+}
+
+.comment-delete-edit-container {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.comment-delete-edit-container button:nth-child(odd) {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--soft-red);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
+
+.comment-delete-edit-container button:nth-child(even) {
+	border: none;
+	background-color: transparent;
+	font-size: var(--button-font-size);
+	font-weight: 600;
+	color: var(--moderate-blue);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+}
+
+@media (max-width: 375px) {
+	.App {
+		height: 100%;
+	}
+
+	.comment {
+		padding: 20px 15px;
+		margin: 10px 0;
+		flex-direction: column;
+
+		max-width: 320px;
+	}
+
+	.rating,
+	.user-info .reply-btn,
+	.delete-btn,
+	.edit-btn {
+		display: none;
+	}
+
+	.user {
+		justify-content: left;
+	}
+
+	.user img {
+		width: 12%;
+	}
+
+	.comment-reply-btn:hover {
+		filter: brightness(0) saturate(100%) invert(90%) sepia(5%) saturate(4854%)
+			hue-rotate(188deg) brightness(99%) contrast(87%);
+	}
+
+	.comment-info-content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.comment-rating {
+		background-color: var(--light-gray);
+		border-radius: 10px;
+		padding: 12px 5px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.comment-rating button {
+		border: none;
+		display: flex;
+		justify-content: center;
+	}
+
+	.comment-rating p {
+		color: var(--moderate-blue);
+		font-weight: 500;
+	}
+
+	.comment-reply-btn button {
+		border: none;
+		background-color: transparent;
+		font-size: var(--button-font-size);
+		font-weight: 600;
+		color: var(--moderate-blue);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 5px;
+	}
+
+	/* Replies to a comment */
+	.reply {
+		max-width: 340px;
+		margin: 10px 0;
+	}
+
+	.reply-divider {
+		border-left: 1px solid var(--light-grayish-blue);
+		margin: 0;
+		margin-right: 10px;
+	}
+
+	/* Julius adding a new comment */
+	.add-comment {
+		margin-top: 10px;
+		padding: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		max-width: 320px;
+	}
+
+	.commenter-avatar.hide {
+		display: none;
+	}
+
+	.add-comment textarea {
+		margin: 0 auto;
+		padding: 10px 15px;
+		min-height: 100px;
+		width: 290px;
+	}
+
+	.send-btn {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.send-btn img {
+		width: 15%;
+	}
+
+	.commenter-avatar.show {
+		display: inline;
+	}
+}
