@@ -1,108 +1,75 @@
-import MinusIcon from '../../../../public/images/icons/icon-minus.svg';
-import PlusIcon from '../../../../public/images/icons/icon-plus.svg';
-import ReplyIcon from '../../../../public/images/icons/icon-reply.svg';
-
-import Reply from '../Reply/Reply';
-
-import JuliusComments from '../JuliusComments/JuliusComents';
-
+import './Comment.css';
+import CommentsForm from '../CommentForm/CommentsForm';
+import ReplyButton from '../../../../public/images/icons/icon-reply.svg';
+import PlusButton from '../../../../public/images/icons/icon-plus.svg';
+import MinusButton from '../../../../public/images/icons/icon-minus.svg';
 import { useState } from 'react';
 
-export default function Comment({
-	rating,
-	id,
-	avatar,
-	userName,
-	userDate,
-	userComment,
-	mapDataReply,
-}) {
-	const [repliedToComment, setRepliedToComment] = useState('');
-	const [showReplyToComment, setShowReplyToComment] = useState(false);
-	const pressedReplyButton = () => {
-		setShowReplyToComment(true);
-		console.log('you clicked me');
+function Comment({ comment, replies, addComment, parentId = null }) {
+	const replyId = parentId ? parentId : comment.id;
+
+	const [isReplying, setIsReplying] = useState(false);
+
+	const replyingToComment = () => {
+		setIsReplying(true);
 	};
 
 	return (
 		<>
-			<div className="comment">
-				<div className="rating" id={id}>
-					<button onClick={() => increaseRating(id)}>
-						<img src={PlusIcon} alt="Plus icon" className="plus-icon icon" />
-					</button>
-
-					<p>{rating}</p>
-					<button onClick={() => decreaseRating(id)}>
-						<img src={MinusIcon} alt="Minus icon" className="minus-icon icon" />
-					</button>
+			<div className="comment-box">
+				<div className="rating-container show">
+					<img src={PlusButton} alt={`Plus icon`} />
+					<p>0</p>
+					<img src={MinusButton} alt={`Minus icon`} />
 				</div>
 				<div className="comment-content">
-					<div className="user-info">
-						<div className="user">
-							<img src={avatar} alt={userName} />
-							<p className="user-name">{userName}</p>
-							<p className="user-date">{userDate}</p>
+					<div className="comment-content-user-info">
+						<div className="user-info">
+							<img src={comment.image} alt={`${comment.username} image`} />
+							<p className="comment-username">{comment.username}</p>
+							<p className="comment-creation-date">{comment.date}</p>
 						</div>
-						<div className="reply-btn show">
-							<button onClick={() => pressedReplyButton()}>
-								<img src={ReplyIcon} alt="Reply icon" />
-								Reply
-							</button>
+
+						<div
+							className="comment-action reply-btn show"
+							onClick={replyingToComment}
+						>
+							<img src={ReplyButton} />
+							<p>Reply</p>
 						</div>
 					</div>
-					<p className="users-comment">{userComment}</p>
+					<p className="comment">{comment.comment}</p>
 
-					{/* Displaying when width is 375px */}
-					<div className="comment-info">
-						<div className="comment-info-content">
-							<div className="comment-rating" id="2">
-								<button>
-									<img
-										src={PlusIcon}
-										alt="Plus icon"
-										className="plus-icon icon"
-									/>
-								</button>
-
-								<p>{rating}</p>
-								<button>
-									<img
-										src={MinusIcon}
-										alt="Minus icon"
-										className="minus-icon icon"
-									/>
-								</button>
-							</div>
-							<div className="comment-reply-btn">
-								<button>
-									<img src={ReplyIcon} alt="Reply icon" />
-									Reply
-								</button>
-							</div>
+					{/* width is 375px and smaller */}
+					<div className="rating-reply-btn-container display">
+						<div className="rating-container ">
+							<img src={PlusButton} alt={`Plus icon`} />
+							<p>0</p>
+							<img src={MinusButton} alt={`Minus icon`} />
+						</div>
+						<div className="comment-action reply-btn ">
+							<img src={ReplyButton} />
+							<p>Reply</p>
 						</div>
 					</div>
 				</div>
 			</div>
+			{isReplying && (
+				<CommentsForm
+					submitLabel="REPLY"
+					handleSubmit={(text) => addComment(text, replyId)}
+				/>
+			)}
 
-			{/* Reply */}
-			{mapDataReply.replies &&
-				mapDataReply.replies.map((reply) => (
-					<Reply
-						key={reply.id}
-						rating={reply.rating}
-						id={reply.id}
-						avatar={reply.author.image}
-						userName={reply.author.name}
-						userDate={reply.author.date}
-						userComment={reply.content}
-					/>
-				))}
-
-			{showReplyToComment ? <Reply /> : ''}
-
-			{/*  Julius replies with a comment*/}
-			{/* <JuliusComments /> */}
+			{replies && replies.length > 0 && (
+				<div className="replies">
+					{replies.map((reply) => {
+						return <Comment key={reply.id} comment={reply} replies={[]} />;
+					})}
+				</div>
+			)}
 		</>
 	);
 }
+
+export default Comment;

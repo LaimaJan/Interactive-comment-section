@@ -12,26 +12,42 @@
 	--desktop-layout: 1440px;
 
 	/* Primary Colors */
-	--moderate-blue: hsl(238, 40%, 52%);
+	--moderate-blue: #5457b6;
 	--soft-red: hsl(358, 79%, 66%);
-	--light-grayish-blue: hsl(239, 57%, 85%);
+	--light-grayish-blue: #c3c4ef;
 	--pale-red: hsl(357, 100%, 86%);
 
 	/* Neutral Colors */
 	--dark-blue: hsl(212, 24%, 26%);
 	--grayish-blue: hsl(211, 10%, 45%);
+	--desktop-gray: #f5f6fa;
+	--medium-gray: hsl(240, 1%, 86%);
 	--light-gray: hsl(223, 19%, 93%);
-	--very-light-gray: hsl(228, 33%, 97%);
 	--white: hsl(0, 0%, 100%);
 
 	/* Font, size -- paragraph */
-	--font-paragraph: 17px;
+	--font-size: 15px;
 	--font: 'Rubik', sans-serif;
 
-	--button-font-size: 18px;
-	--users-comment-font-size: 18px;
+	--border-radius: 7px;
 }
 
 p {
-	font-size: var(--font-paragraph);
+	font-size: var(--font-size);
+
+	color: var(--grayish-blue);
+	letter-spacing: 0.3px;
+	line-height: 20px;
+}
+
+p,
+button,
+div,
+textarea {
+	font-family: var(--font);
+}
+
+button,
+textarea {
+	cursor: pointer;
 }
