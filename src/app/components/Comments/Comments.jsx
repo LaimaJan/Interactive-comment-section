@@ -6,7 +6,10 @@ import { useState, useEffect } from 'react';
 
 function Comments({ currentUserId }) {
 	const [backendComments, setBackendComments] = useState([]);
+	const [commentId, setCommentId] = useState(null);
+	const [action, setAction] = useState(null);
 
+	console.log('Backend comments');
 	console.log(backendComments);
 
 	const parentComment = backendComments.filter(
@@ -14,15 +17,82 @@ function Comments({ currentUserId }) {
 	);
 
 	const getReplies = (commentId) => {
-		return backendComments.filter(
+		const replies = backendComments.filter(
 			(backendComment) => backendComment.parentId === commentId
 		);
+
+		console.log('Comments.jsx replies: ', replies);
+		return replies;
 	};
 
 	const addComment = (text, parentId) => {
 		createComment(text, parentId).then((comment) => {
+			setBackendComments([comment, ...backendComments]);
+		});
+	};
+
+	// const addComment = (text, parentId) => {
+	// 	createComment(text, parentId).then((comment) => {
+	// 		if (typeof parentId === 'number') {
+	// 			// Add top-level comment to the backendComments
+	// 			setBackendComments([comment, ...backendComments]);
+	// 		} else {
+	// 			// Add the reply to the corresponding comment's replies array
+	// 			const updatedComments = backendComments.map((c) =>
+	// 				c.id === parentId ? { ...c, replies: [comment, ...c.replies] } : c
+	// 			);
+	// 			setBackendComments(updatedComments);
+	// 		}
+	// 	});
+	// };
+
+	const addJuliusComment = (text, parentId) => {
+		createComment(text, parentId).then((comment) => {
 			setBackendComments([...backendComments, comment]);
 		});
+	};
+
+	const deleteJuliusComment = (id) => {
+		const updatedComments = backendComments.filter(
+			(backendComment) => backendComment.id !== id
+		);
+		console.log('updatedcomments: ', updatedComments);
+		setBackendComments(updatedComments);
+	};
+
+	const editJuliusComment = (editedText, commentId) => {
+		const editedCommentIndex = backendComments.findIndex(
+			(comment) => comment.id === commentId
+		);
+
+		if (editedCommentIndex !== -1) {
+			const editedComment = {
+				...backendComments[editedCommentIndex],
+				comment: editedText,
+			};
+
+			const updatedComments = [
+				...backendComments.slice(0, editedCommentIndex),
+				editedComment,
+				...backendComments.slice(editedCommentIndex + 1),
+			];
+
+			setBackendComments(updatedComments);
+		}
+	};
+
+	const increaseDecreaseCommentRating = (commentId, action) => {
+		const updatedComments = backendComments.map((comment) => {
+			if (comment.id === commentId) {
+				return {
+					...comment,
+					rating:
+						action === 'increase' ? comment.rating + 1 : comment.rating - 1,
+				};
+			}
+			return comment;
+		});
+		setBackendComments(updatedComments);
 	};
 
 	useEffect(() => {
@@ -39,14 +109,21 @@ function Comments({ currentUserId }) {
 						<Comment
 							key={comment.id}
 							comment={comment}
-							replies={getReplies(comment.id)}
+							getReplies={getReplies}
 							addComment={addComment}
+							deleteJuliusComment={deleteJuliusComment}
+							editJuliusComment={editJuliusComment}
+							increaseDecreaseCommentRating={increaseDecreaseCommentRating}
 						/>
 					);
 				})}
 			</div>
 			<div className="comments-form-container">
-				<CommentsForm handleSubmit={addComment} submitLabel={'Write'} />
+				<CommentsForm
+					handleSubmit={addJuliusComment}
+					submitLabel={'SEND'}
+					juliusWritesComment={'Add a comment ...'}
+				/>
 			</div>
 		</div>
 	);

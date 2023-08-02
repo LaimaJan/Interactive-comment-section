@@ -66,6 +66,52 @@
 	font-weight: 400;
 }
 
+.julius-badge {
+	background-color: var(--moderate-blue);
+	height: 18px;
+	padding: 0 4px;
+	display: flex;
+	align-items: center;
+}
+
+.julius-badge p {
+	color: var(--white);
+	font-size: 12px;
+}
+
+.edit-delete-btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.delete-btn,
+.edit-btn {
+	display: flex;
+	flex-direction: row;
+	margin-right: 10px;
+	justify-content: space-between;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}
+
+.delete-btn,
+.edit-btn img {
+	height: 14px;
+}
+
+.delete-btn p {
+	font-weight: 500;
+	color: var(--soft-red);
+}
+
+.edit-btn p {
+	font-weight: 500;
+	color: var(--moderate-blue);
+}
+
 .reply-btn {
 	display: flex;
 	flex-direction: row;
@@ -84,6 +130,37 @@
 .reply-btn:hover {
 	filter: brightness(0) saturate(100%) invert(77%) sepia(72%) saturate(899%)
 		hue-rotate(189deg) brightness(110%) contrast(87%);
+}
+
+.edit-comment-textarea {
+	margin: 10px;
+
+	padding: 12px 20px;
+	height: 80px;
+	box-sizing: border-box;
+	border: 2px solid var(--light-grayish-blue);
+	border-radius: var(--border-radius);
+	resize: none;
+	outline: none;
+	color: black;
+}
+
+.update-btn-container button {
+	margin: 0 auto;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 0;
+
+	border: none;
+	background-color: var(--moderate-blue);
+	border-radius: var(--border-radius);
+	color: var(--white);
+	font-weight: 500;
+	padding: 8px 18px;
+}
+
+.update-btn-container {
+	margin-right: 10px;
 }
 
 .comment {
@@ -108,7 +185,7 @@
 	background-color: var(--medium-gray);
 }
 
-.display {
+.rating-reply-btn-container {
 	display: none;
 }
 

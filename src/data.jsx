@@ -2,8 +2,9 @@ export const getComments = async () => {
 	return [
 		{
 			id: '1',
-			rating: '0',
+			rating: 5,
 			userId: '1',
+			//null - because it doesn't have a parent comment
 			parentId: null,
 			image: './images/avatars/image-amyrobson.png',
 			username: 'amyrobson',
@@ -14,7 +15,7 @@ export const getComments = async () => {
 		},
 		{
 			id: '2',
-			rating: '0',
+			rating: 3,
 			userId: '2',
 			parentId: null,
 			image: './images/avatars/image-maxblagun.png',
@@ -26,8 +27,9 @@ export const getComments = async () => {
 		},
 		{
 			id: '3',
-			rating: '0',
+			rating: 0,
 			userId: '3',
+			// parentId- 2 because it has a parent comment - maxblagun
 			parentId: '2',
 			image: './images/avatars/image-ramsesmiron.png',
 			username: 'ramsenmiro',
@@ -36,23 +38,13 @@ export const getComments = async () => {
 				"@maxblagun If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
 			timestamp: 343434,
 		},
-		{
-			id: '4',
-			rating: '0',
-			userId: '4',
-			image: './images/avatars/image-juliusomo.png',
-			username: 'juliusmomo',
-			date: 'Right now',
-			comment: '',
-			timestamp: 343434,
-		},
 	];
 };
 
 export const createComment = async (text, parentId = null) => {
 	return {
 		id: Math.random().toString(36).substr(2, 9),
-		rating: '0',
+		rating: 0,
 		userId: '4',
 		parentId,
 		image: './images/avatars/image-juliusomo.png',

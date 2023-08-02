@@ -43,3 +43,38 @@
 .comment-form-send-btn:hover {
 	background-color: var(--light-grayish-blue);
 }
+
+.comment-form-image-send-btn {
+	display: none;
+}
+
+@media (max-width: 410px) {
+	.comments-form {
+		flex-direction: column;
+		justify-content: space-between;
+
+		max-width: 340px;
+		margin-left: 20px;
+	}
+
+	.comment-form-image-send-btn {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.icon-button-container {
+		padding-top: 10px;
+		width: 100%;
+
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.comments-form-img.display {
+		width: 30px;
+	}
+}
