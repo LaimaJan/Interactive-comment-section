@@ -6,8 +6,6 @@ import { useState, useEffect } from 'react';
 
 function Comments({ currentUserId }) {
 	const [backendComments, setBackendComments] = useState([]);
-	const [commentId, setCommentId] = useState(null);
-	const [action, setAction] = useState(null);
 
 	console.log('Backend comments');
 	console.log(backendComments);
@@ -21,7 +19,6 @@ function Comments({ currentUserId }) {
 			(backendComment) => backendComment.parentId === commentId
 		);
 
-		console.log('Comments.jsx replies: ', replies);
 		return replies;
 	};
 
@@ -30,21 +27,6 @@ function Comments({ currentUserId }) {
 			setBackendComments([comment, ...backendComments]);
 		});
 	};
-
-	// const addComment = (text, parentId) => {
-	// 	createComment(text, parentId).then((comment) => {
-	// 		if (typeof parentId === 'number') {
-	// 			// Add top-level comment to the backendComments
-	// 			setBackendComments([comment, ...backendComments]);
-	// 		} else {
-	// 			// Add the reply to the corresponding comment's replies array
-	// 			const updatedComments = backendComments.map((c) =>
-	// 				c.id === parentId ? { ...c, replies: [comment, ...c.replies] } : c
-	// 			);
-	// 			setBackendComments(updatedComments);
-	// 		}
-	// 	});
-	// };
 
 	const addJuliusComment = (text, parentId) => {
 		createComment(text, parentId).then((comment) => {

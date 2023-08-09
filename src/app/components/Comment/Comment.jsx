@@ -24,8 +24,6 @@ function Comment({
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedText, setEditedText] = useState(comment.comment);
 	const [commentRating, setCommentRating] = useState(comment.rating);
-	const [commentId, setCommentId] = useState(null);
-	const [action, setAction] = useState(null);
 
 	const replyingToComment = () => {
 		setIsReplying(!isReplying);
@@ -36,8 +34,9 @@ function Comment({
 	};
 
 	const handleRatingChange = (action) => {
-		setCommentId(comment.id);
-		setAction(action);
+		const updatedRating =
+			action === 'increase' ? commentRating + 1 : commentRating - 1;
+		setCommentRating(updatedRating);
 		increaseDecreaseCommentRating(comment.id, action);
 	};
 
@@ -151,8 +150,6 @@ function Comment({
 			{replies && replies.length > 0 && (
 				<div className="replies">
 					{replies.map((reply) => {
-						// console.log('replies: ', replies);
-						console.log('Reply', reply);
 						return (
 							<Comment
 								key={reply.id}
@@ -160,8 +157,8 @@ function Comment({
 								getReplies={getReplies}
 								increaseDecreaseCommentRating={increaseDecreaseCommentRating}
 								addComment={addComment}
-								// deleteJuliusComment={deleteJuliusComment}
-								// editJuliusComment={editJuliusComment}
+								deleteJuliusComment={deleteJuliusComment}
+								editJuliusComment={editJuliusComment}
 							/>
 						);
 					})}
