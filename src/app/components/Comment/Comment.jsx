@@ -12,7 +12,7 @@ function Comment({
 	getReplies,
 	addComment,
 	parentId = null,
-	deleteJuliusComment,
+	commentModalDelete,
 	editJuliusComment,
 	increaseDecreaseCommentRating,
 }) {
@@ -77,7 +77,7 @@ function Comment({
 							<div className="comment-action edit-delete-btn show">
 								<div
 									className="delete-btn"
-									onClick={() => deleteJuliusComment(comment.id)}
+									onClick={() => commentModalDelete(comment.id)}
 								>
 									<img src={DeleteButton} />
 									<p>Delete</p>
@@ -140,7 +140,7 @@ function Comment({
 							<div className="comment-action edit-delete-btn display">
 								<div
 									className="delete-btn"
-									onClick={() => deleteJuliusComment(comment.id)}
+									onClick={() => commentModalDelete(comment.id)}
 								>
 									<img src={DeleteButton} />
 									<p>Delete</p>
@@ -183,7 +183,7 @@ function Comment({
 								getReplies={getReplies}
 								increaseDecreaseCommentRating={increaseDecreaseCommentRating}
 								addComment={addComment}
-								deleteJuliusComment={deleteJuliusComment}
+								commentModalDelete={commentModalDelete}
 								editJuliusComment={editJuliusComment}
 							/>
 						);

@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 
 function Comments({ currentUserId }) {
 	const [backendComments, setBackendComments] = useState([]);
-
-	console.log('Backend comments');
-	console.log(backendComments);
+	const [showModal, setShowModal] = useState(false);
+	const [deleteComment, setDeleteComment] = useState(false);
+	const [commentToDeleteId, setCommentToDeleteId] = useState(null);
 
 	const parentComment = backendComments.filter(
 		(backendComment) => backendComment.parentId === null
@@ -34,12 +34,32 @@ function Comments({ currentUserId }) {
 		});
 	};
 
-	const deleteJuliusComment = (id) => {
+	const closeModal = () => {
+		setShowModal(false);
+		setDeleteComment(false);
+	};
+
+	const confirmModalDelete = () => {
+		setDeleteComment(true);
+
+		if (deleteComment) {
+			deleteJuliusComment();
+		}
+	};
+
+	const commentModalDelete = (commentId) => {
+		setShowModal(true);
+		setCommentToDeleteId(commentId);
+	};
+
+	const deleteJuliusComment = () => {
+		setShowModal(false);
 		const updatedComments = backendComments.filter(
-			(backendComment) => backendComment.id !== id
+			(backendComment) => backendComment.id !== commentToDeleteId
 		);
 		console.log('updatedcomments: ', updatedComments);
 		setBackendComments(updatedComments);
+		setDeleteComment(false);
 	};
 
 	const editJuliusComment = (editedText, commentId) => {
@@ -78,10 +98,16 @@ function Comments({ currentUserId }) {
 	};
 
 	useEffect(() => {
+		if (deleteComment && showModal) {
+			deleteJuliusComment();
+		}
+	}, [deleteComment, showModal]);
+
+	useEffect(() => {
 		getCommentsApi().then((data) => {
 			setBackendComments(data);
 		});
-	}, []);
+	}, [deleteComment]);
 
 	return (
 		<div className="comments">
@@ -93,7 +119,7 @@ function Comments({ currentUserId }) {
 							comment={comment}
 							getReplies={getReplies}
 							addComment={addComment}
-							deleteJuliusComment={deleteJuliusComment}
+							commentModalDelete={commentModalDelete}
 							editJuliusComment={editJuliusComment}
 							increaseDecreaseCommentRating={increaseDecreaseCommentRating}
 						/>
@@ -107,6 +133,23 @@ function Comments({ currentUserId }) {
 					juliusWritesComment={'Add a comment ...'}
 				/>
 			</div>
+			{showModal && (
+				<div className="modal">
+					<div className="modal-content">
+						<div className="text-container">
+							<p className="modal-header">Delete comment</p>
+							<p className="modal-text">
+								Are you sure you want to delete this comment? This will remove
+								the comment and can't be undone.
+							</p>
+						</div>
+						<div className="button-container">
+							<button onClick={closeModal}>NO, CANCEL</button>
+							<button onClick={confirmModalDelete}>YES, DELETE</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
