@@ -1,11 +1,13 @@
 .comments-form {
 	max-width: 600px;
+	width: 100%;
+	box-sizing: border-box;
 	background-color: var(--white);
 	padding: 15px 15px;
 	border-radius: var(--border-radius);
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	gap: 10px;
 	justify-content: space-between;
 }
 
@@ -18,9 +20,12 @@
 	width: 80%;
 }
 
+.textarea-container {
+	width: 100%;
+}
+
 .comment-form-textarea {
 	width: 100%;
-	margin: 0 10px;
 	padding: 12px 20px;
 	height: 80px;
 	box-sizing: border-box;
@@ -48,12 +53,16 @@
 	display: none;
 }
 
-@media (max-width: 410px) {
+@media (max-width: 510px) {
 	.comments-form {
 		flex-direction: column;
-		justify-content: space-between;
-
 		max-width: 340px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.replies .comments-form {
+		max-width: 320px;
 		margin-left: 20px;
 	}
 

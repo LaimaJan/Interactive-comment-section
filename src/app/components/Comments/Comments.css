@@ -19,5 +19,21 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+
 	margin: 0 auto;
+}
+
+@media (max-width: 510px) {
+	.comments-container {
+		max-width: 510px;
+	}
+
+	.comments-form-container {
+		max-width: 510px;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 }

@@ -4,7 +4,6 @@ export const getComments = async () => {
 			id: '1',
 			rating: 5,
 			userId: '1',
-			//null - because it doesn't have a parent comment
 			parentId: null,
 			image: './images/avatars/image-amyrobson.png',
 			username: 'amyrobson',
@@ -29,7 +28,6 @@ export const getComments = async () => {
 			id: '3',
 			rating: 0,
 			userId: '3',
-			// parentId- 2 because it has a parent comment - maxblagun
 			parentId: '2',
 			image: './images/avatars/image-ramsesmiron.png',
 			username: 'ramsenmiro',

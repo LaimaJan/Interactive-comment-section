@@ -120,20 +120,46 @@ function Comment({
 						<p className="comment">{comment.comment}</p>
 					)}
 
-					{/* width is 375px and smaller */}
+					{/* show when width <510px */}
 					<div className="rating-reply-btn-container display">
 						<div className="rating-container ">
-							<img src={PlusButton} alt={`Plus icon`} />
-							<p>0</p>
-							<img src={MinusButton} alt={`Minus icon`} />
+							<img
+								src={PlusButton}
+								alt={`Plus icon`}
+								onClick={() => handleRatingChange('increase')}
+							/>
+							<p>{commentRating}</p>
+							<img
+								src={MinusButton}
+								alt={`Minus icon`}
+								onClick={() => handleRatingChange('decrease')}
+							/>
 						</div>
-						<div
-							className="comment-action reply-btn"
-							onClick={replyingToComment}
-						>
-							<img src={ReplyButton} />
-							<p>Reply</p>
-						</div>
+
+						{isJuliusComment ? (
+							<div className="comment-action edit-delete-btn display">
+								<div
+									className="delete-btn"
+									onClick={() => deleteJuliusComment(comment.id)}
+								>
+									<img src={DeleteButton} />
+									<p>Delete</p>
+								</div>
+
+								<div className="edit-btn" onClick={toggleEditing}>
+									<img src={EditButton} />
+									<p>Edit</p>
+								</div>
+							</div>
+						) : (
+							<div
+								className="comment-action reply-btn display"
+								onClick={replyingToComment}
+							>
+								<img src={ReplyButton} />
+								<p>Reply</p>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

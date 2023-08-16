@@ -26,17 +26,20 @@ function CommentsForm({
 					/>
 				</div>
 
-				<textarea
-					className="comment-form-textarea"
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-					placeholder={juliusWritesComment}
-				/>
+				<div className="textarea-container">
+					<textarea
+						className="comment-form-textarea"
+						value={text}
+						onChange={(e) => setText(e.target.value)}
+						placeholder={juliusWritesComment}
+					/>
+				</div>
+
 				<div className="comments-form-send-btn-container show">
 					<button className="comment-form-send-btn">{submitLabel}</button>
 				</div>
 
-				{/* show when display is <410px */}
+				{/* show when display is <510px */}
 				<div className="comment-form-image-send-btn display">
 					<div className="icon-button-container">
 						<img
