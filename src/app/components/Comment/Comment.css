@@ -12,6 +12,12 @@
 	border-radius: var(--border-radius);
 }
 
+.comment-box.julius-comment .comment-content {
+	max-width: 526px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .rating-container {
 	display: flex;
 	flex-direction: column;
